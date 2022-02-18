@@ -3,38 +3,40 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>com.janclarin.jisho-alfred-workflow</string>
-	<key>category</key>
-	<string>Internet</string>
+	<string>tv.feets.jisho</string>
 	<key>connections</key>
 	<dict>
-		<key>1865FB59-0F30-4428-B737-3D4AAF0E1A79</key>
+		<key>27A5A6EC-ED47-451A-A47F-D0B598A5EBB0</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5CE6446D-82ED-4381-BC48-C7DE74BF234D</string>
+				<string>11A91492-7074-4BEA-9A0F-B389849C957A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
-		<key>75C8F161-A27B-42A5-9078-A472596EAEB3</key>
+		<key>7D9DF57A-5DF9-5DB9-AB88-88DAC6AD7FB1</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5CE6446D-82ED-4381-BC48-C7DE74BF234D</string>
+				<string>11A91492-7074-4BEA-9A0F-B389849C957A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
-	<string>Jan Clarin</string>
+	<string>Feets</string>
 	<key>description</key>
-	<string>Easily search Jisho.org, a powerful Japanese-English dictionary.</string>
+	<string>Search Jisho.org</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -44,8 +46,10 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>plusspaces</key>
-				<false/>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
 				<key>url</key>
 				<string>http://jisho.org/search/{query}</string>
 				<key>utf8</key>
@@ -54,13 +58,21 @@
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>5CE6446D-82ED-4381-BC48-C7DE74BF234D</string>
+			<string>11A91492-7074-4BEA-9A0F-B389849C957A</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -72,32 +84,44 @@
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Loading definitions...</string>
+				<string>Loading definitions…</string>
 				<key>script</key>
-				<string>python jisho.py "{query}"</string>
+				<string>python3 entrypoint.py "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>entrypoint.py</string>
 				<key>subtext</key>
 				<string>Search for Japanese and English words</string>
 				<key>title</key>
 				<string>Jisho.org</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>75C8F161-A27B-42A5-9078-A472596EAEB3</string>
+			<string>7D9DF57A-5DF9-5DB9-AB88-88DAC6AD7FB1</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -109,51 +133,67 @@
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Loading definitions...</string>
+				<string>定義をロード中…</string>
 				<key>script</key>
-				<string>python jisho.py "{query}"</string>
+				<string>python3 entrypoint.py "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>entrypoint.py</string>
 				<key>subtext</key>
-				<string>Search for Japanese and English words</string>
+				<string>日本語と英語の言葉を探す</string>
 				<key>title</key>
 				<string>Jisho.org</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>1865FB59-0F30-4428-B737-3D4AAF0E1A79</string>
+			<string>27A5A6EC-ED47-451A-A47F-D0B598A5EBB0</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>An Alfred workflow to easily search Jisho.org, a powerful Japanese-English online dictionary. It uses the Jisho.org API to retrieve search results and instantly display them within Alfred's search results.
+
+Forked from https://github.com/janclarin/jisho-alfred under the MIT Licence and updated for Python 3</string>
 	<key>uidata</key>
 	<dict>
-		<key>1865FB59-0F30-4428-B737-3D4AAF0E1A79</key>
+		<key>11A91492-7074-4BEA-9A0F-B389849C957A</key>
 		<dict>
+			<key>xpos</key>
+			<integer>440</integer>
 			<key>ypos</key>
-			<real>300</real>
+			<integer>75</integer>
 		</dict>
-		<key>5CE6446D-82ED-4381-BC48-C7DE74BF234D</key>
+		<key>27A5A6EC-ED47-451A-A47F-D0B598A5EBB0</key>
 		<dict>
+			<key>xpos</key>
+			<integer>195</integer>
 			<key>ypos</key>
-			<real>170</real>
+			<integer>205</integer>
 		</dict>
-		<key>75C8F161-A27B-42A5-9078-A472596EAEB3</key>
+		<key>7D9DF57A-5DF9-5DB9-AB88-88DAC6AD7FB1</key>
 		<dict>
+			<key>xpos</key>
+			<integer>195</integer>
 			<key>ypos</key>
-			<real>170</real>
+			<integer>75</integer>
 		</dict>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0.0</string>
 	<key>webaddress</key>
-	<string>https://github.com/janclarin/jisho-alfred-workflow</string>
+	<string>github.com/feetstv</string>
 </dict>
 </plist>
