@@ -2,7 +2,7 @@
 
 An [Alfred](https://www.alfredapp.com/) workflow to easily search [Jisho.org](http://jisho.org/), a powerful Japanese-English online dictionary. It uses the Jisho.org API to retrieve search results and instantly display them within Alfred's search results.
 
-**[DOWNLOAD](https://github.com/feetstv/jisho-alfred/releases/download/1.0.0/jisho.alfredworkflow)**
+**[DOWNLOAD](https://github.com/feetstv/jisho-alfred/releases/download/1.0/Jisho.org.alfredworkflow)**
 
 ![Preview](preview.gif)
 
