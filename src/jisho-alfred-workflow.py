@@ -1,11 +1,20 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
+from __future__ import annotations
 
+import os
 import sys
-from itertools import chain
-from workflow import Workflow, web, ICON_WEB, ICON_INFO, ICON_NOTE, ICON_ERROR
 
-API_URL = 'http://jisho.org/api/v1/search/words'
+import json
+import urllib.request, urllib.parse
+
+# setup access to the local .site-packages
+sys.path.insert(0, os.path.dirname(__file__) + "/.site-packages")  # noqa
+
+
+from workflow import Workflow3, ICON_WEB, ICON_INFO, ICON_NOTE, ICON_ERROR
+
+API_URL = 'https://jisho.org/api/v1/search/words'
 MAX_NUM_RESULTS = 50  # Maximum number of results to show in Alfred.
 SEP_COMMA = u'、 '    # Separator between Japanese characters and words.
 SEP_BAR = u' | '      # Separator between different info: kana and definitions.
@@ -18,15 +27,13 @@ def get_results(query):
     Returns:
         An array of JSON results from Jisho.org based on search query.
     """
-    params = dict(keyword=query)
-    request = web.get(API_URL, params)
-
-    # Throw an error if request failed.
-    request.raise_for_status()
-
+    request = urllib.request.urlopen(API_URL + "?keyword=" + urllib.parse.quote(query, encoding='utf-8'))
     # Parse response as JSON and extract results.
-    response = request.json()
-    return response['data']
+    data = request.read()
+    encoding = request.info().get_content_charset('utf-8')
+    json_obj = json.loads(data.decode(encoding))
+
+    return json_obj['data']
 
 
 def add_alfred_result(wf, result):
@@ -96,7 +103,7 @@ def combine_english_defs(senses, separator=u', '):
                       if 'english_definitions' in sense]
 
     # Combine the inner lists of English definitions into one list.
-    combined_eng_defs = chain.from_iterable(eng_defs_lists)
+    combined_eng_defs = [eng_def for eng_def_list in eng_defs_lists for eng_def in eng_def_list]
     return separator.join(combined_eng_defs)
 
 
@@ -111,7 +118,7 @@ def is_valid_query(query):
     return not (sanitized_query == u'"' or sanitized_query == u"'")
 
 
-def main(wf):
+def main(wf: Workflow3):
     """Main function to handle query and request info from Jisho.org.
     Args:
         wf: An instance of Workflow.
@@ -138,17 +145,20 @@ def main(wf):
             # Add an error result if there was an issue getting results.
             error_msg = "Could not find anything matching '%s'" % (query)
             wf.add_item(error_msg, arg=query, valid=True, icon=ICON_NOTE)
-    except:
+    except Exception as e:
         # Add an error result if there was an issue getting results.
         error_msg = "There was an issue retrieving Jisho results"
+        print(e)
         wf.add_item(error_msg, arg=query, valid=True, icon=ICON_ERROR)
 
     # Send the results to Alfred as XML.
     wf.send_feedback()
 
-if __name__ == '__main__':
-    # Initialize and configure workflow to self-update.
-    wf = Workflow(update_settings={
-        'github_slug': 'janclarin/jisho-alfred-workflow'
-    })
-    sys.exit(wf.run(main))
+if __name__ == "__main__":
+    # Create a global `Workflow3` object
+    wf = Workflow3()
+    wf.logger.info(__name__)
+    # Call your entry function via `Workflow3.run()` to enable its
+    # helper functions, like exception catching, ARGV normalization,
+    # magic arguments etc.
+    wf.run(main)
